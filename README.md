@@ -9,6 +9,7 @@ This guide explains how to set up a Python virtual environment with the required
 - Python 3.8 or higher installed on your system.
 - `pip` (Python package manager) installed.
 - dcm2niix (`sudo apt-get install  dcm2niix` if necessary)
+- then find the location of dcm2niix using `which dcm2niix`
 ---
 
 ## Step 1: Create a Virtual Environment
@@ -61,9 +62,4 @@ When you are done, deactivate the environment:
 deactivate
 ```
 
----
 
-## Additional Notes
-
-- Always ensure `pip` is up-to-date: `pip install --upgrade pip`.
-- To delete the virtual environment, simply remove the `venv` folder.
