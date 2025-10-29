@@ -4,7 +4,7 @@ This guide explains how to set up a Python virtual environment with the required
 
 # Context
 
-For a given folder containing CT images in DICOM format stored in `MWA_20250918a_CT/IMAGES/`, the script will produce the corresponding arborescence with the NIFTI and JSON files, Then, everything can be zipped up and sent or uploaded.
+For a given folder containing CT images in DICOM format stored in `MWA_20250918a_CT/IMAGES/`, the script will produce the corresponding arborescence with the NIFTI and JSON files. Then, everything is zipped up and to be sent or uploaded.
 
 ```
 ├── MWA20250918a
