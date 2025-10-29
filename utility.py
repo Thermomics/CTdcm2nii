@@ -8,6 +8,7 @@ import datetime
 from dicom_csv import join_tree
 import warnings
 from pathlib import Path
+import errno
 
 def contains_word_insensitive(string, words):
     
@@ -512,9 +513,14 @@ def step1(dossier_images, folder_move):
     print("     ",dossier_images)
     liste_of_IMA=glob.glob(dossier_images+"/*")
     print("         contains ",len(liste_of_IMA), " images files")
-
+    
     if not os.path.exists(folder_move):
-        os.makedirs(folder_move)  
+        print("folder creation",  folder_move)        
+        try:
+            os.makedirs(folder_move)  
+        except OSError:
+            raise('Error while creating ', folder_move)
+
 
 
     # Examine one IMAGES folder "dossier_images" if not empty
@@ -533,6 +539,7 @@ def step1(dossier_images, folder_move):
             if (len(meta_of_interest)!=0):
                 # creation du nouveau dossier de type serie number en 3 chiffres
                 new_directory=os.path.join(folder_move,str(series_number).zfill(3))
+                
                 if not os.path.exists(new_directory):
                     os.makedirs(new_directory)    
 
@@ -551,7 +558,7 @@ def step1(dossier_images, folder_move):
                         source = filename_full
                         # destination = new_directory +'/' +file
                         destination = os.path.join(new_directory, file)
-                        # print(source,destination)                
+                        #print(source,destination)                
                         shutil.copy2(source, destination)
                     # else:
                     #    print("not exist anymore ",file)     
@@ -714,8 +721,10 @@ def step2(dossier_examen,out_folder, dcm2niix):
 
         update_magnitude_and_phase_image_nifti_name(nifti_fullpath_out)
         print("         -> NIFTI - renommage partie 2 ")     
-
-    shutil.make_archive(patient_fullpath_out, 'zip', patient_fullpath_out)
+    
+    shutil.make_archive(patient_fullpath_out+'_CT_nii_ready', 'zip', patient_fullpath_out)
+    print('             ===========================')
+    print("         A zip file with all converted data is available ,  ", patient_fullpath_out+'_CT_nii_ready.zip')     
         
 
 
