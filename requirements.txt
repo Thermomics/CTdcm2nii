@@ -1,0 +1,6 @@
+DateTime==5.5
+dicom_csv==0.4.0
+numpy==2.3.4
+pandas==2.3.3
+pathlib==1.0.1
+pydicom==3.0.1
