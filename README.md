@@ -92,6 +92,15 @@ deactivate
 
 ## 6. Use the script
 
+You must defined:
+
+* dicom_folder: the folder containing DICOM images , make sure everything is in XXX/IMAGES/ otherwise it won't work 
+* nifti_patient_folder_out : the output folder for NIfTI images
+* dcm2niix : the location of dcm2niix on your system
+* step 1: will sort all DICOM files per sequence in temporary folder /nifti_patient_folder_out/tmp/001/ [...]/tmp/002/ [...]/tmp/003/
+  step 2: will convert each sequence in nifti and delete the temporary folder
+* both will do step 1 and step 2
+
 ```
 python3 convert_dicom_to_nifti.py --dicom_folder /home/vozenne/Bureau/ToBeDeleted/MWA_20250918a_CT/IMAGES/ \
                       --nifti_patient_folder_out /home/vozenne/Bureau/ToBeDeleted/OUTPUT_CT/ \
@@ -108,7 +117,7 @@ python3 convert_dicom_to_nifti.py --dicom_folder /home/vozenne/Bureau/ToBeDelete
                       --both
 ```
 
-option both shoudl end with 
+option `both` should end with 
 ```
 
 A zip file with all converted data is available ,   /home/vozenne/Bureau/ToBeDeleted/OUTPUT_CT/MWA20250918a_CT_nii_ready.zip
@@ -117,7 +126,7 @@ Finished.
 
 ```
 
-option step 1 should return
+option `step 1` should return
 
 ```
 =========Step 1 Starting =======================
