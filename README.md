@@ -1,6 +1,27 @@
-# Setup Virtual Environment for DICOM to NIfTI Conversion of CT exams
+# DICOM to NIfTI Conversion of CT exams
 
-This guide explains how to set up a Python virtual environment with the required dependencies for the DICOM to NIfTI conversion script.
+This guide explains how to set up a Python virtual environment with the required dependencies for the DICOM to NIfTI conversion script and then use the conversion script.
+
+# Context
+
+For a given folder with CT images in dicom format stored in `MWA_20250918a_CT/IMAGES/`, the script with produce automatically (hopefully), such arborescence with the corresponding nifti, json files, then everything is Zip to be send or upload.
+
+```
+├── MWA20250918a
+│   └── 2025-09-08_CT-pre-ablation
+│       ├── RAW-DICOM
+│       ├── RAW-NIFTI
+│       │   ├── 004__leber-art.-0.75-wt-via.json
+│       │   ├── 004__leber-art.-0.75-wt-via.nii.gz
+│       │   ├── 005__leber-art.-3.0-wt.json
+│       │   ├── 005__leber-art.-3.0-wt.nii.gz
+│       │   ├── 013__equilibriumphas-0.75-wt-via.json
+│       │   ├── 013__equilibriumphas-0.75-wt-via.nii.gz
+│       │   ├── 014__equilibriumphas-3.0-wt.json
+│       │   └── 014__equilibriumphas-3.0-wt.nii.gz
+│       └── RAW-NRRD
+└── MWA20250918a_CT_nii_ready.zip
+```
 
 ---
 
@@ -9,7 +30,7 @@ This guide explains how to set up a Python virtual environment with the required
 - Python 3.8 or higher installed on your system.
 - `pip` (Python package manager) installed.
 - dcm2niix (`sudo apt-get install  dcm2niix` if necessary)
-- then find the location of dcm2niix using `which dcm2niix`
+- find the location of dcm2niix using `which dcm2niix`
 ---
 
 ## Step 1: Create a Virtual Environment
@@ -17,7 +38,7 @@ This guide explains how to set up a Python virtual environment with the required
 Open a terminal and navigate to your project directory. Run the following command to create a virtual environment:
 
 ```bash
-python -m venv PyEnvCTdcm2nii
+python3 -m venv PyEnvCTdcm2nii
 
 ```
 ---
@@ -42,6 +63,12 @@ With the virtual environment activated, install the required packages:
 pip install DateTime==5.5 dicom_csv==0.4.0 numpy==2.3.4 pandas==2.3.3 pydicom==3.0.1
 ```
 
+or if you get a message error about numpy, pick
+
+```bash
+pip install DateTime==5.5 dicom_csv==0.4.0 numpy==2.2.6 pandas==2.3.3 pydicom==3.0.1
+```
+
 ---
 
 ## 4. Verify the Installation
@@ -63,3 +90,69 @@ deactivate
 ```
 
 
+## 6. Use the script
+
+```
+python3 convert_dicom_to_nifti.py --dicom_folder /home/vozenne/Bureau/ToBeDeleted/MWA_20250918a_CT/IMAGES/ \
+                      --nifti_patient_folder_out /home/vozenne/Bureau/ToBeDeleted/OUTPUT_CT/ \
+                      --dcm2niix /usr/bin/dcm2niix \
+                      --step1
+```
+
+or
+
+```
+python3 convert_dicom_to_nifti.py --dicom_folder /home/vozenne/Bureau/ToBeDeleted/MWA_20250918a_CT/IMAGES/ \
+                      --nifti_patient_folder_out /home/vozenne/Bureau/ToBeDeleted/OUTPUT_CT/ \
+                      --dcm2niix /usr/bin/dcm2niix \
+                      --both
+```
+
+option both shoudl end with 
+```
+
+A zip file with all converted data is available ,   /home/vozenne/Bureau/ToBeDeleted/OUTPUT_CT/MWA20250918a_CT_nii_ready.zip
+=========Step 2 Done=======================
+Finished.
+
+```
+
+option step 1 should return
+
+```
+=========Step 1 Starting =======================
+      /home/vozenne/Bureau/ToBeDeleted/MWA_20250918a_CT/IMAGES/
+         contains  986  images files
+IM00868: : 986it [00:01, 565.10it/s]
+         that are from 14 different series
+===========================
+not moving :  1  series
+===========================
+not moving :  2  series
+===========================
+not moving :  3  series
+             ===========================
+             moving  336  images of serie n° 4
+             ===========================
+             moving  157  images of serie n° 5
+===========================
+not moving :  6  series
+===========================
+not moving :  7  series
+===========================
+not moving :  8  series
+===========================
+not moving :  9  series
+===========================
+not moving :  10  series
+===========================
+not moving :  11  series
+===========================
+not moving :  12  series
+             ===========================
+             moving  336  images of serie n° 13
+             ===========================
+             moving  157  images of serie n° 14
+=========Step 1 Done=======================
+Finished.
+```
