@@ -1,0 +1,4 @@
+PyEnvCTdcm2nii
+*.dcm
+*IMA
+__pycache__/
