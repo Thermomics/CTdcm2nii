@@ -92,7 +92,7 @@ deactivate
 
 ## 6. Use the script
 
-You must defined:
+You must define:
 
 * dicom_folder: the folder containing DICOM images , make sure everything is in XXX/IMAGES/ otherwise it won't work 
 * nifti_patient_folder_out : the output folder for NIfTI images
