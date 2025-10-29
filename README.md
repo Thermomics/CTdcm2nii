@@ -79,15 +79,6 @@ Check the installed packages and their versions:
 pip list
 ```
 
----
-
-## 5. Deactivate the Virtual Environment
-
-When you are done, deactivate the environment:
-
-```bash
-deactivate
-```
 
 
 ## 6. Use the script
@@ -168,4 +159,15 @@ not moving :  12  series
              moving  157  images of serie n° 14
 =========Step 1 Done=======================
 Finished.
+```
+
+
+---
+
+## 5. Deactivate the Virtual Environment
+
+When you are done, deactivate the environment:
+
+```bash
+deactivate
 ```
