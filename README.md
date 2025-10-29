@@ -94,12 +94,16 @@ deactivate
 
 You must define:
 
-* dicom_folder: the folder containing DICOM images , make sure everything is in XXX/IMAGES/ otherwise it won't work 
+* dicom_folder: the folder containing DICOM images  
 * nifti_patient_folder_out : the output folder for NIfTI images
 * dcm2niix : the location of dcm2niix on your system
 * step 1: will sort all DICOM files per sequence in temporary folder /nifti_patient_folder_out/tmp/001/ [...]/tmp/002/ [...]/tmp/003/
   step 2: will convert each sequence in nifti and delete the temporary folder
 * both will do step 1 and step 2
+
+
+> **Note:** the folder `IMAGES` being hard coded, make sure everything is in MWA_XXXXXXXXa_CT/IMAGES/ otherwise it won't work. 
+
 
 ```
 python3 convert_dicom_to_nifti.py --dicom_folder /home/vozenne/Bureau/ToBeDeleted/MWA_20250918a_CT/IMAGES/ \
